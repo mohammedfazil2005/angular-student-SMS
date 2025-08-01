@@ -1,0 +1,14 @@
+
+.table-wrapper{
+    width: 100%;
+    overflow-x: scroll;
+}
+.left{
+    position: sticky;
+    left: 0;
+}
+
+.right{
+    position: sticky;
+    right: 0px;
+}

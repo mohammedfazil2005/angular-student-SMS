@@ -1,0 +1,13 @@
+div{
+    max-width: 400px;
+    outline: none;
+    padding: 5px;
+}
+div label{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+div input{
+ height: 20px;
+ width: 100%;
+}

@@ -1,0 +1,10 @@
+.home-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+.home-header div{
+  display: flex;
+  gap: 10px;
+}

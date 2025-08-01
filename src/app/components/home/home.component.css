@@ -1,0 +1,33 @@
+.home-container{
+  margin: 0px 20px;
+}
+.table-wrapper{
+  width: 100%;
+  overflow-x: scroll;
+}
+.sticky-left{
+  position: sticky;
+  left: 0px;
+  background-color: white;
+  z-index: 1;
+}
+.sticky-left-2{
+  position: sticky;
+  left:160px;
+  z-index: 1;
+
+}
+
+.sticky-right{
+  position: sticky;
+  right: 0px;
+}
+
+th, td {
+  padding: 8px 16px;
+  box-sizing: border-box;
+}
+td{
+  min-width: 160px;
+  font-weight: lighter;
+}

@@ -1,0 +1,15 @@
+<div class="dialog-wrapper">
+  <h2 mat-dialog-title class="dialog-title">Add student</h2>
+
+  <mat-dialog-content>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>subjectName</mat-label>
+      <input matInput [(ngModel)]="subjectName" name="subjectName"  />
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+    <button mat-stroked-button color="primary" (click)="addSubject()" mat-dialog-close>Add</button>
+  </mat-dialog-actions>
+</div>

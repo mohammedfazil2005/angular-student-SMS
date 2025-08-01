@@ -1,0 +1,21 @@
+.dialog-wrapper {
+  width: 100%;
+  min-width: 500px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.dialog-title {
+  text-align: center;
+  font-weight: bold;
+}
+
+@media (max-width: 555px) {
+  .dialog-wrapper {
+    min-width: 300px;
+  }
+}
