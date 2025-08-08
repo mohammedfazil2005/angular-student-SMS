@@ -1,0 +1,20 @@
+<button style="float: left;"mat-fab (click)="router.navigateByUrl('/admin')"><mat-icon>reply</mat-icon></button>
+
+<div class="edit-profile-container">
+<div class="edit-profile-row">
+    <div>
+        <h1><mat-icon>person</mat-icon>{{studentData.name}}</h1>
+        <p><mat-icon>email</mat-icon>{{studentData.email}}</p>
+    </div>
+    <div>
+        <img [src]="browserDiskStorage?'http://localhost:3000/uploads/'+browserDiskStorage:'//static.vecteezy.com/system/resources/previews/027/448/973/non_2x/avatar-account-icon-default-social-media-profile-photo-vector.jpg'" alt="userimage">
+        
+    
+                <input type="file" (change)="onImageChange($event)" #fileInput style="display: none;"/>
+
+              <button (click)="fileInput.click()"  style="width: 100%;border-radius: 0px;" mat-flat-button>Change</button>
+     
+      
+    </div>
+</div>
+</div>

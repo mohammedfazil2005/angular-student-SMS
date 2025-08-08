@@ -1,0 +1,76 @@
+.student-panel{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px 10px;
+}
+
+.student-panel-row{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.student-panel-row-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.student-panel-row-header div p{
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+.student-panel-row h1{
+    font-weight: lighter;
+    font-size: 32px;
+}
+.student-panel-row h1 span{
+    font-weight: bold;
+    color: gray;
+    /* font-size: 14px; */
+}
+
+.student-panel-row div img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.student-panel-table{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 30px 10px;
+    height: 200px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.student-panel-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    /* padding: 10px; */
+    height: 30px;
+      margin-top: 20px;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+}
+
+.student-panel-table-row div h6{
+    font-size: 30px;
+    font-weight: 300;
+  
+}
+
+
+.student-panel-table-row div h5{
+    font-size: 30px;
+    font-weight: bolder;
+    margin-right: 30px;
+    /* margin-top: 10px; */
+    
+}

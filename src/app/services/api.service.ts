@@ -9,6 +9,11 @@ export class ApiService {
   constructor(private http:HttpClient) { }
 
 
+  onLogin(body:any){
+    return this.http.post("/login",body)
+  }
+
+
   fetchStudents(){
     return this.http.get('/getstudentdetails')
   }
@@ -19,8 +24,8 @@ export class ApiService {
   addStudent(body:any){
     return this.http.post("/addstudent",body)
   }
-  onGetSingleStudent(rollno:number){
-    return this.http.get(`/getsingle/student/${rollno}`)
+  onGetSingleStudent(){
+    return this.http.get(`/getsingle/student/`)
   }
   onDeleteStudent(rollno:number){
     return this.http.delete(`/deletestudent/${rollno}`)
@@ -32,6 +37,18 @@ export class ApiService {
 
   onUpdateMarks(body:any){
     return this.http.post('/addmark',body)
+  }
+
+  onDeleteSubjects(id:number){
+    return this.http.delete(`/deletesubject/${id}`)
+  }
+
+    onGetSingleStudentAdmin(id:number){
+    return this.http.get(`/getsingle/student/admin?id=${id}`)
+  }
+
+  onUpdateProfile(id:number,body:any){
+    return this.http.patch(`/updateimage/${id}`,body)
   }
 
 

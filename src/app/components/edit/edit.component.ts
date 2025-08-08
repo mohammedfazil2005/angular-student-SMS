@@ -32,11 +32,12 @@ export class EditComponent {
   }
 
   onSaveEdit(each:any,mark:any){
-    console.log(each)
+    // console.log(each)
     if(Number(mark.value)<=0||Number(mark.value)>100){
       return alert("Please enter mark btw 1/100")
     }
     const findSubject=this.data.subjects.find((res:any)=>res.sub==each)
+    console.log(findSubject)
     let newObj={
       studentID:this.userData.rollno,
       subjectID:findSubject.id,

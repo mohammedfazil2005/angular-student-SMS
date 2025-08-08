@@ -1,9 +1,11 @@
   <div class="home-header">
     <div>
       <h1 style="font-weight: bolder;">Student Management</h1>
+      <img src="https://www.kindpng.com/picc/m/227-2271076_student-management-system-symbol-hd-png-download.png" alt="">
     </div>
     <div>
-      <button mat-raised-button color="accent" (click)="openDialog()">Add Student</button>
-      <button mat-stroked-button color="warn" (click)="openDialogSubject()">Add Subject</button>
+      <button mat-raised-button color="accent" (click)="openDialog()">Add Student <mat-icon>add</mat-icon></button>
+      <button mat-raised-button color="accent" (click)="openDialogSubject()">Add Subject <mat-icon>book</mat-icon></button>
+      <button mat-fab (click)="logout()"><mat-icon>logout</mat-icon></button>
     </div>
   </div>

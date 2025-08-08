@@ -4,30 +4,209 @@
 .table-wrapper{
   width: 100%;
   overflow-x: scroll;
+  box-shadow: 0px 0px 1px;
 }
 .sticky-left{
   position: sticky;
   left: 0px;
   background-color: white;
-  z-index: 1;
+  z-index: 2;
 }
 .sticky-left-2{
   position: sticky;
-  left:160px;
-  z-index: 1;
+  left:165px;
+  z-index: 2;
 
 }
 
 .sticky-right{
   position: sticky;
   right: 0px;
+  z-index: 2;
 }
-
+th{
+  cursor: move;
+}
 th, td {
   padding: 8px 16px;
   box-sizing: border-box;
 }
-td{
-  min-width: 160px;
+td,th{
+  min-width: 165px;
   font-weight: lighter;
+  border-right:3px solid lightgray;
+  text-align: center;
+}
+th{
+  min-width: 165px;
+}
+th div{
+  display: flex;
+  justify-content: center;
+}
+.actionbtn-div{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.actionbtn-div button{
+  box-shadow: none;
+  padding: 0px;
+  height: 30px;
+  width: 30px;
+
+  border-radius: none;
+}
+
+.expansiontable{
+  display: none;
+
+}
+
+.expansiontable.expanded{
+  display: table-row;
+   
+}
+
+.expansion-td {
+  padding: 0px;
+  background-color: white;
+  /* overflow-x: auto; */
+  padding: 0px;position: sticky;left: 0px;width: 400px;;border: 0px;overflow-x: hidden;
+}
+
+.container-input-expansion{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.container-input-expansion-each{
+  width: 350px;
+  display: flex;
+  ;gap: 10px;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.container-input-expansion-each p{
+  font-weight: lighter;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.container-input-expansion-each input{
+  align-self: start;
+  padding: 8px;
+  border: none;
+  border-bottom: 2px solid darkblue;
+  outline: none;
+  cursor: pointer;
+  text-align: start;
+  width: 80%;
+}
+
+.custom-header {
+  display: flex;
+  padding: 8px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ccc;
+  user-select: none;
+  width: 100%;
+  overflow: hidden;
+
+}
+
+.header-cell {
+  border: 1px solid black;
+  width: 165px;
+   padding: 8px 16px;
+   background-color: white;
+}
+.sticky-left-col{
+  border: 1px solid black;
+  width: 165px;
+   padding: 8px 16px;
+   position: sticky;
+   left: 0px;
+   background-color: white;
+}
+
+.sticky-left-2-col{
+   border: 1px solid black;
+  width: 165px;
+   padding: 8px 16px;
+   position: sticky;
+  left:165px;
+  z-index: 2;
+   background-color: white;
+
+
+}
+
+.sticky-right-col{
+  border: 1px solid black;
+  width: 165px;
+   padding: 8px 16px;
+   position: sticky;
+  right: 0px;
+  z-index: 2;
+   background-color: white;
+
+}
+
+
+.example-drag-cursor {
+  margin-right: 16px;
+  cursor: move;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  background-color: white;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging .mat-row:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+
+
+@media screen and (max-width:688px) {
+  th,td{
+    min-width: 0px;
+    width: 50px;
+  }
+  .sticky-left-2{
+    left: 78px;
+  }
+}
+  
+
+@media screen and (max-width:493px) {
+  th,td{
+   font-size: 14px;
+  }
+  th,td{
+    max-width: 100px;
+
+  }
+  .sticky-left-2{
+    left: 78px;
+  }
+ 
 }

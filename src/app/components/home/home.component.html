@@ -2,33 +2,86 @@
   <app-header (onRefresh)="onStudentAdded()"></app-header>
 
   <div class="table-wrapper">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows cdkDropList (cdkDropListDropped)="drop($event)"
+  [cdkDropListData]="dataSource" cdkDropListOrientation="horizontal">
 
 
-      <ng-container [matColumnDef]="column" *ngFor="let column of displayColumn">
-        <th style="text-transform: uppercase;font-weight: bold;" mat-header-cell *matHeaderCellDef [ngClass]="column=='rollno'?'sticky-left':column=='name'?'sticky-left-2':column=='actions'?'sticky-right':''"> {{column}} </th>
-        <td mat-cell *matCellDef="let element" [ngClass]="column=='rollno'?'sticky-left':column=='name'?'sticky-left-2':column=='actions'?'sticky-right':''"> 
-          @if (column=="actions") {
-            <div style="display: flex;gap: 10px;">
-              <button (click)="deleteStudent(element)" mat-fab style="height: 30px;width: 30px;" aria-label="Example icon button with a delete icon">
-        <mat-icon>delete</mat-icon>
-      </button>
-       <button (click)="editStudent(element)" mat-fab style="height: 30px;width: 30px;" aria-label="Example icon button with a edit icon">
-        <mat-icon>edit</mat-icon>
-      </button>
-            </div>
-          }@else {
-            {{element[column]||'Not entered!'}} 
+      <ng-container  [matColumnDef]="column" *ngFor="let column of displayColumn" >
+        <th cdkDrag  style="text-transform: uppercase;font-weight: 400;font-size: 12px;" mat-header-cell *matHeaderCellDef
+          [ngClass]="column=='rollno'?'sticky-left':column=='name'?'sticky-left-2':column=='actions'?'sticky-right':''" >
+          @if(column!=="rollno"&&column!=="name"&&column!=="actions"){
+          <div style="display: flex;align-items: center;gap: 4px;">
+            <p>  {{column}}</p>
+            <button (click)="deleteSubject(column)" mat-fab
+              style="height: 10px;width: 20px;background-color: transparent;box-shadow: none;z-index: 1;"
+              aria-label="Example icon button with a delete icon">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          } @else {
+          <p>{{column}}</p>
           }
+        </th>
+        <td mat-cell *matCellDef="let element"
+          [ngClass]="column=='rollno'?'sticky-left':column=='name'?'sticky-left-2':column=='actions'?'sticky-right':''">
+          <ng-container [ngSwitch]="column">
+            <div class="actionbtn-div" *ngSwitchCase="'actions'">
+              <button (click)="deleteStudent(element)" mat-fab aria-label="Example icon button with a delete icon">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button (click)="editStudent(element)" mat-fab aria-label="Example icon button with a edit icon">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+            <p *ngSwitchDefault style="display: flex; align-items: center;gap: 10px;justify-content: space-between;"> {{element[column]||'0'}}<mat-icon style="cursor: pointer;" *ngIf="column=='name'" (click)="onViewClick(element.rollno)">visibility</mat-icon> </p>
+          </ng-container>
+
+        </td>
+
+      </ng-container>
+      <ng-container [matColumnDef]="'expansion'">
+        <td class="expansion-td" mat-cell *matCellDef="let element" [attr.colspan]="8">
+
+          <mat-accordion *ngIf="isOpenedExpansions === element" >
+            <mat-expansion-panel [expanded]="isOpenedExpansions === element" style="padding: 0px;border-radius: 0px; " class="expansion-panel">
+              <mat-expansion-panel-header (click)="editStudent(element)">
+                <div>
+                  <mat-panel-title>Name:{{element.name}}</mat-panel-title>
+                  <mat-panel-description>RollNo:{{element.rollno}} </mat-panel-description>
+                </div>
+              </mat-expansion-panel-header>
+              <div class="container-input-expansion">
+                <div *ngFor="let each of dummySubjects" class="container-input-expansion-each">
+                  <p >{{each.sub}}</p>
+                  <input type="number"maxlength="3" [value]="editData[each.sub]" [(ngModel)]="editData[each.sub]" type="text">
+                </div>
+              </div>
+              <div style="display: flex;justify-content: start;margin-top: 10px;">
+                 <button mat-flat-button style="width: 200px;border-radius: 0px;" (click)="onUpdateStudent(editData)">Update</button>
+              </div>
+             
+            </mat-expansion-panel>
+            
+
+          </mat-accordion>
         </td>
       </ng-container>
 
 
 
+
+
+
+     
       <tr mat-header-row *matHeaderRowDef="displayColumn"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayColumn;"></tr>
+      <tr (click)="logData(row)" mat-row *matRowDef="let row; columns: displayColumn;"></tr>
+      <tr mat-row *matRowDef="let row;columns:['expansion']" class="expansiontable"
+        [class.expanded]="row==isOpenedExpansions"></tr>
+       
+
     </table>
 
 
   </div>
 </div>
+

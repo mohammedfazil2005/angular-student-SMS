@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule} from '@angular/material/input';
 import { ApiService } from '../../services/api.service';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-addsubject',
@@ -15,7 +16,7 @@ import { FormsModule } from '@angular/forms';
 export class AddsubjectComponent {
   subjectName:string=""
 
-  constructor(private api:ApiService){}
+  constructor(private api:ApiService,private snackbar:MatSnackBar){}
 
 
   addSubject(){
@@ -23,7 +24,14 @@ export class AddsubjectComponent {
       let body={subject:this.subjectName}
       this.api.onAddSubject(body).subscribe({
         next:(res:any)=>{
-          alert(res.message)
+          this.snackbar.open(res.message,"dismiss",{
+          horizontalPosition:'center',
+          verticalPosition:'top'
+        })
+         this.subjectName=""
+         setTimeout(()=>{
+          this.snackbar.dismiss()
+         },2000)
         },
         error:(res)=>{
           alert(res.error.message)

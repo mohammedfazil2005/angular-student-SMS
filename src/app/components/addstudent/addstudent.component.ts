@@ -4,30 +4,44 @@ import {  MatDialogActions, MatDialogClose, MatDialogContent } from '@angular/ma
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule} from '@angular/material/input';
 import { ApiService } from '../../services/api.service';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-addstudent',
-  imports: [MatDialogActions,MatDialogContent,MatButtonModule,MatDialogClose,MatInputModule,MatFormFieldModule, FormsModule],
+  imports: [MatDialogActions,MatDialogContent,MatButtonModule,MatDialogClose,MatInputModule,MatFormFieldModule, ReactiveFormsModule],
   templateUrl: './addstudent.component.html',
   styleUrl: './addstudent.component.css'
 })
 export class AddstudentComponent {
+  studentFormGroup:FormGroup
 
   @Output() OnAdd =new EventEmitter
   
-  constructor(private http:ApiService){}
-  studentName:string=""
+  constructor(private http:ApiService,private snackbar:MatSnackBar,private FB:FormBuilder){
+    this.studentFormGroup=FB.group({
+      name:['',[Validators.required]],
+      email:['',[Validators.required,Validators.required]],
+      password:['',[Validators.required]],
+    })
+  }
+ 
 
   addStudent(){
-    if(this.studentName){
-      let reqBody={name:this.studentName}
-      this.http.addStudent(reqBody).subscribe((res:any)=>{
-        this.OnAdd.emit("Student added")
-        alert(res.message||res.error.message)
+    if(this.studentFormGroup.valid){
+      this.http.addStudent(this.studentFormGroup.value).subscribe((res:any)=>{
+        this.snackbar.open("Student added","dismiss",{
+          horizontalPosition:'center',
+          verticalPosition:'top'
+        })
+   this.studentFormGroup.reset()
+   this.OnAdd.emit("student added!")
       })
     }else{
-      alert("Please enter name!")
+      this.snackbar.open("Please Fill the fornm!","dismiss",{
+          horizontalPosition:'center',
+          verticalPosition:'top'
+        })
     }
   }
   

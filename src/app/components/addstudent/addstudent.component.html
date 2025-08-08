@@ -1,11 +1,21 @@
 <div class="dialog-wrapper">
   <h2 mat-dialog-title class="dialog-title">Add student</h2>
 
-  <mat-dialog-content>
-    <mat-form-field appearance="fill" class="full-width">
+  <mat-dialog-content >
+    <form action="" [formGroup]="studentFormGroup" (ngSubmit)="addStudent()">
+      <mat-form-field appearance="fill" class="full-width">
       <mat-label>Student Name</mat-label>
-      <input matInput [(ngModel)]="studentName" name="studentName"  />
+      <input matInput formControlName="name" name="name"   />
     </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" name="email"   />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName="password" name="password"   />
+    </mat-form-field>
+    </form>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">

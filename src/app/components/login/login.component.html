@@ -1,0 +1,29 @@
+<div class="login-container">
+    <div class="login-row">
+        <div class="login-left">
+            <h1>Portal Login</h1>
+            <p>Make sure your account is secure</p>
+            <div>
+                <img src="https://onesky.com.bd/frontendAssets/img/admin-login.png" alt="">
+            </div>
+        </div>
+        <form class="login-right" [formGroup]="formGroup" (ngSubmit)="onSubmit($event)">
+            <mat-form-field>
+                <mat-label>Enter your email</mat-label>
+                <input  formControlName="email" matInput placeholder="pat@example.com" required />
+
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Enter your password</mat-label>
+                <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" />
+                <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <button mat-flat-button color="primary">Login</button>
+        </form>
+    </div>
+
+</div>

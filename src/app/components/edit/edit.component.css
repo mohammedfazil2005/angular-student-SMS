@@ -8,6 +8,36 @@ div label{
     text-transform: uppercase;
 }
 div input{
- height: 20px;
+ height: 15px;
  width: 100%;
+}
+div label{
+    height: 10px;
+}
+
+h2{
+  /* text-transform: uppercase; */
+  margin: 0px;
+  font-weight: bold;
+  margin: 0px 30px
+}
+
+h2 span{
+    font-weight: lighter;
+    margin: 0px;
+    font-size: 15px;
+
+
+}
+
+div button{
+    /* background-color: transparent; */
+    border-radius: 0px;
+  
+}
+
+@media screen and (max-width:440px) {
+    div{
+        max-width: 100%;
+    }
 }

@@ -1,0 +1,35 @@
+<div class="student-panel">
+    <div class="student-panel-row">
+       <div class="student-panel-row-header">
+        <div>
+             <h1>Welcome back <span>Mohammed Fazil</span></h1>
+              <div style="display: flex;">
+                 <img [src]="'http://localhost:3000/uploads/'+profileDetails.image_url ||'https://t3.ftcdn.net/jpg/01/97/11/64/360_F_197116416_hpfTtXSoJMvMqU99n6hGP4xX0ejYa4M7.jpg'" alt="profile">
+             <p><mat-icon>email</mat-icon>{{profileDetails.email}}</p>
+              </div>
+        </div>
+        <div style="display: flex;flex-direction: column;gap: 20px;">
+          
+            <button mat-raised-button (click)="logout()"><mat-icon>logouticon</mat-icon>Logout</button>
+        </div>
+       </div>
+       <h1 style="font-weight: bolder;"><mat-icon>schoolicon</mat-icon>Your marks! </h1>
+       <div class="student-panel-table">
+       <div class="student-panel-table-row" *ngFor="let each of profileDetails.marks">
+        <div class="student-panel-box" *ngIf="getKeys(each) as result">
+            <div>
+                <h6><mat-icon>book</mat-icon> {{result.key}}</h6>
+            </div>
+            <div>
+                <h5>{{result.value}}</h5>
+            </div>
+        </div>
+       </div>
+       </div>
+      
+
+
+    </div>
+</div>
+
+
