@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../../services/api.service';
-import { MatTableModule } from '@angular/material/table';
+// import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -38,11 +38,17 @@ export class UserhomeComponent {
   constructor(private api :ApiService,private snackbar:MatSnackBar,private router:Router){}
 
    getAllSubjects(){
-    this.api.fetchAllSubjects().subscribe((res:any)=>{
+    this.api.fetchAllSubjects().subscribe({
+      next:(res:any)=>{
     res.forEach((each:any)=>{
       this.subjects.push(each.sub)
     })
     this.getUserDetails()
+    },
+    error:()=>{
+      localStorage.clear()
+      this.router.navigateByUrl("/")
+    }
     })
     
   }
@@ -73,7 +79,7 @@ export class UserhomeComponent {
 
      this.profileDetails=newObj
 
-     console.log(this.profileDetails)
+    //  console.log(this.profileDetails)
 
    
   })
@@ -90,9 +96,13 @@ getKeys(each:any){
   return obj
 }
 logout(){
-  sessionStorage.clear()
+  this.api.onLogout().subscribe(()=>{
+    localStorage.clear()
+   sessionStorage.clear()
+   this.router.navigateByUrl("/")
   this.snackbar.open("Logged out","dismiss",{horizontalPosition:"center",verticalPosition:"top"})
-  this.router.navigateByUrl("/")
+  })
+  
 }
 
 }

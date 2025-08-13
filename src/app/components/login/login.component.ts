@@ -6,17 +6,25 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CommonModule } from '@angular/common';
+import { CdkDragPlaceholder } from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-login',
-  imports: [MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule],
+  imports: [MatInputModule, MatIconModule, MatButtonModule, ReactiveFormsModule, MatProgressSpinnerModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
+  ngOnInit(){
+  
+  }
+
   hide: boolean = true;
   formGroup: FormGroup
+  isLoading:boolean=false
 
   constructor(private FB: FormBuilder, private snackbar: MatSnackBar, private api: ApiService,private router:Router) {
     this.formGroup = this.FB.group({
@@ -36,14 +44,21 @@ export class LoginComponent {
 
       let data = this.formGroup.value
 
+      this.isLoading=true
+
       this.api.onLogin(data).subscribe({
+        
         next: (res: any) => {
-          sessionStorage.setItem("token",res.token)
-          sessionStorage.setItem("role",res.role)
+         
+          this.api.accessToken=res.token
+          localStorage.setItem("role",res.role)
+        
           if(res.role!="admin"){
             this.router.navigateByUrl("/users")
+              this.isLoading=false
           }else{
             this.router.navigateByUrl("/admin")
+              this.isLoading=false
           }
           this.snackbar.open(res.message, "dismiss", {
             horizontalPosition: "center",
@@ -54,6 +69,7 @@ export class LoginComponent {
           }, 1500)
         },
         error: (reason: any) => {
+            this.isLoading=false
           this.snackbar.open(reason.error.message, "dismiss", {
             horizontalPosition: "center",
             verticalPosition: 'top'

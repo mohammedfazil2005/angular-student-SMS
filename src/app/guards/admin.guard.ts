@@ -5,13 +5,12 @@ import { CanActivateFn, Router } from '@angular/router';
 export const adminGuard: CanActivateFn = (route, state) => {
   const router=inject(Router)
   const snackbar=inject(MatSnackBar)
-  let isAdmin=sessionStorage.getItem("role")
-  let token=sessionStorage.getItem("token")
-  if(isAdmin=="admin"&&token){
+  let isAdmin=localStorage.getItem("role")
+  if(isAdmin=="admin"){
     return true
   }
   router.navigateByUrl('')
-  snackbar.open("Please login again","dismiss",{
+  snackbar.open("Unauthorized!","dismiss",{
     horizontalPosition:"center",
     verticalPosition:"top"
   })

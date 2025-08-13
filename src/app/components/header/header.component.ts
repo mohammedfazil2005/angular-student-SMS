@@ -6,6 +6,7 @@ import { AddsubjectComponent } from '../addsubject/addsubject.component';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ApiService } from '../../services/api.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class HeaderComponent {
 
   @Output() onRefresh =new EventEmitter
   
-  constructor(private dialog:MatDialog,private router:Router,private snackBar:MatSnackBar){}
+  constructor(private dialog:MatDialog,private router:Router,private snackBar:MatSnackBar,private api:ApiService){}
   openDialog(){
    const dialogRef= this.dialog.open(AddstudentComponent)
     dialogRef.afterClosed().subscribe((res:any)=>{
@@ -33,8 +34,12 @@ export class HeaderComponent {
     })
   }
   logout(){
-  sessionStorage.clear()
+    this.api.onLogout().subscribe(()=>{
+      localStorage.clear()
+        sessionStorage.clear()
   this.snackBar.open("Logged out","dismiss",{horizontalPosition:"center",verticalPosition:"top"})
   this.router.navigateByUrl("/")
+    })
+
 }
 }

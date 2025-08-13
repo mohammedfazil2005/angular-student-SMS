@@ -4,7 +4,7 @@
         <div>
              <h1>Welcome back <span>Mohammed Fazil</span></h1>
               <div style="display: flex;">
-                 <img [src]="'http://localhost:3000/uploads/'+profileDetails.image_url ||'https://t3.ftcdn.net/jpg/01/97/11/64/360_F_197116416_hpfTtXSoJMvMqU99n6hGP4xX0ejYa4M7.jpg'" alt="profile">
+                 <img [src]="profileDetails.image_url?'http://localhost:3000/uploads/'+profileDetails.image_url:'https://i.pinimg.com/736x/c0/74/9b/c0749b7cc401421662ae901ec8f9f660.jpg'" alt="profile">
              <p><mat-icon>email</mat-icon>{{profileDetails.email}}</p>
               </div>
         </div>

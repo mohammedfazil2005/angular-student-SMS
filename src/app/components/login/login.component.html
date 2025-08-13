@@ -1,5 +1,9 @@
 <div class="login-container">
-    <div class="login-row">
+    <div *ngIf="isLoading;else elseblock" style="display: flex;justify-content: center;height: 100vh;align-items: center;">
+        <mat-spinner></mat-spinner>
+    </div>
+   <ng-template #elseblock>
+     <div  class="login-row">
         <div class="login-left">
             <h1>Portal Login</h1>
             <p>Make sure your account is secure</p>
@@ -16,7 +20,7 @@
             <mat-form-field>
                 <mat-label>Enter your password</mat-label>
                 <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" />
-                <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
+                <button type="button" mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
@@ -25,5 +29,6 @@
             <button mat-flat-button color="primary">Login</button>
         </form>
     </div>
+   </ng-template>
 
 </div>

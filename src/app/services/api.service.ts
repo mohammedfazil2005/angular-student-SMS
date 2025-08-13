@@ -6,7 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class ApiService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+    this.accessToken=localStorage.getItem("token")||""
+  }
+
+  accessToken:string=""
 
 
   onLogin(body:any){
@@ -49,6 +53,13 @@ export class ApiService {
 
   onUpdateProfile(id:number,body:any){
     return this.http.patch(`/updateimage/${id}`,body)
+  }
+  onLogout(){
+    return this.http.post(`/logout`,{})
+  }
+
+  onRefreshToken(){
+    return this.http.post("/refreshtoken",{})
   }
 
 

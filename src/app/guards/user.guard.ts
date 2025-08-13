@@ -1,17 +1,19 @@
 import { inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CanActivateFn, Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 export const userGuard: CanActivateFn = (route, state) => {
 const router=inject(Router)
   const snackbar=inject(MatSnackBar)
-  let isAdmin=sessionStorage.getItem("role")
-  let token=sessionStorage.getItem("token")
-  if(isAdmin=="student"&&token){
+  const service=inject(ApiService)
+  let isAdmin=localStorage.getItem("role")
+  
+  if(isAdmin=="student"){
     return true
   }
   router.navigateByUrl('')
-  snackbar.open("Please login again","dismiss",{
+  snackbar.open("Unauthorized!","dismiss",{
     horizontalPosition:"center",
     verticalPosition:"top"
   })
